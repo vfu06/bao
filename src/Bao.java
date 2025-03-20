@@ -1,48 +1,41 @@
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Bao< E extends Comparable<E>> {
-    private int quantity;
-    private int date;
-    public E i;
+    private String product;
+    private int popularity;
 
-    ArrayList<String> items = new ArrayList<String>();
-    //private Treeable<E> products;
 
-    public int getQuantity()
-    {
-        String filePath = "orders.csv";
-        String line;
-        String splitBy = ",";
+    public Bao(String product, int popularity) {
+        this.product = product;
+        this.popularity = popularity;
+    }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(splitBy);
-                for (String quantity : data) {
-                    System.out.print(quantity + " ");
-                }
-                System.out.println();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void popularity() {
+        String filePath = "menuItem.csv";
+        ArrayList<Bao> menuItem = new ArrayList<>();
+
+        try(FileWriter fw = new FileWriter("menuItem", true)){
+            fw.append(String.valueOf(popularity)).append("/n");
+            System.out.println("Successfully wrote to the file.");
+        }catch(IOException e){
+            System.out.println("Error writing to file");
         }
-        return this.quantity;
-
+    }
+    public int getPopularity() {
+        return popularity;
     }
 
-    public int getDate()
-    {
-        return this.date;
-    }
 
-    public void items()
-    {
-        items.add("Pork buns");
-        items.add("Vegan bun");
-        items.add("Plain Steamed buns");
-    }
+
+
+
+
+
+
 
     @Override
     public String toString() {
